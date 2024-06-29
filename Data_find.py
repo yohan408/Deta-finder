@@ -33,7 +33,7 @@ YYY:::::Y   Y:::::YYY  R::::R     R:::::R                         W:::::W       
     print(banner)
 
 def extract_data(content):
-    # Regular expressions for extracting names, Gmail addresses, and messages
+
     name_regex = re.compile(r'\bName: ([A-Za-z ]+)\b')
     email_regex = re.compile(r'\b[A-Za-z0-9._%+-]+@gmail\.com\b')
     message_regex = re.compile(r'\bMessage: ([\s\S]+?)(?=Name: |\Z)', re.MULTILINE)
@@ -52,12 +52,12 @@ def extract_data_from_url():
         return None
     try:
         response = requests.get(url)
-        response.raise_for_status()  # Raise an exception for HTTP errors
+        response.raise_for_status()  
         content = response.text
 
-        # If the URL returns HTML content, parse it using BeautifulSoup
+       
         soup = BeautifulSoup(content, 'html.parser')
-        text_content = soup.get_text(separator='\n')  # Get all text content, separated by newlines
+        text_content = soup.get_text(separator='\n')  
         return extract_data(text_content)
     except requests.RequestException as e:
         print(f"An error occurred while fetching the URL: {e}")
